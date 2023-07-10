@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  client:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./data/nginx:/etc/nginx/conf.d
+      - ./data/build:/usr/share/nginx/html
+      - ./data/ssl:/etc/nginx/ssl
+    restart: unless-stopped
