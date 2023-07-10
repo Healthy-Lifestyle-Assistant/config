@@ -1,0 +1,10 @@
+version: "3"
+services:
+  assistant:
+    container_name: assistant
+    image: healthylifestyle/assistant:0.0.1
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
+    restart: unless-stopped
