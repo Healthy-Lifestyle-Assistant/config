@@ -1,10 +1,26 @@
 version: "3"
 services:
   assistant:
-    container_name: assistant
+    container_name: app
     image: healthylifestyle/assistant:0.0.1
+    networks:
+      - postgres
+      - metrics
+    environment:
+      - PROFILE=${PROFILE}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
     expose:
-      - 3000
+      - 8085
     ports:
-      - 3000:3000
+      - 8085:8085
     restart: unless-stopped
+
+networks:
+  postgres:
+    external:
+      name: common
+  metrics:
+    external:
+      name: metrics
