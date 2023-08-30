@@ -7,12 +7,16 @@ services:
       - grafana_storage:/var/lib/grafana
     networks:
       - metrics
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
     restart: unless-stopped
 
 networks:
   metrics:
-    external:
-      name: metrics
+    name: metrics
+    external: true
 
 volumes:
   grafana_storage: {}

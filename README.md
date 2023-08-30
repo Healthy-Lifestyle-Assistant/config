@@ -61,7 +61,7 @@ cd ~/config/postgres
 cp .env_template .env
 # add your env variables to .env
 vim .
-docker-compose up [--force-recreate] -d
+docker compose up [--force-recreate] -d
 ```
 
 Note, that PostgreSQL container will automatically create a database with username and password,
@@ -74,21 +74,21 @@ cd ~/config/app
 cp .env_template .env
 # add your env variables to .env
 vim .
-docker-compose up [--force-recreate] -d
+docker compose up [--force-recreate] -d
 ```
 
 ### Run Prometheus Container
 
 ```sh
 cd ~/config/prometheus
-docker-compose up [--force-recreate] -d
+docker compose up [--force-recreate] -d
 ```
 
 ### Run Grafana Container
 
 ```sh
 cd ~/config/grafana
-docker-compose up [--force-recreate] -d
+docker compose up [--force-recreate] -d
 ```
 
 [Top](#configuration)
@@ -115,10 +115,10 @@ https://grafana.com/docs/grafana/latest/dashboards/manage-dashboards/#import-a-d
 
 ```sh
 # Run container, or create and run if not created yet
-docker-compose [-f <path/to/docker-compose.yml>] up [<container_name>] [--force-recreate] [-d]
+docker compose [-f <path/to/docker-compose.yml>] up [<container_name>] [--force-recreate] [-d]
 
 # Stop container
-docker-compose down [<container_name>]
+docker compose down [<container_name>]
 
 # List all running containers
 docker ps
@@ -126,8 +126,11 @@ docker ps
 # List all containers
 docker ps -a
 
+# List containers with format
+docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}"
+
 # Logs
-docker-compose logs <container_name_or_id>
+docker compose logs <container_name_or_id>
 
 # Run bash inside docker container
 docker exec -it <container_name_or_id> bash
@@ -141,6 +144,40 @@ docker network create metrics
 
 # List networks
 docker network ls
+```
+
+### PostgreSQL Terminal with Docker
+
+```sh
+docker exec -it <container_name_or_id> bash
+
+which psql
+psql -V  # Client version
+postgres -V  # Server version
+
+psql -U username dbname
+
+# display conn info
+\conninfo
+
+# list all roles
+\dg
+\du
+
+# list all databases
+\l
+
+# list all tables
+\dt
+
+# describe table
+\d tablename
+
+# change database
+\c newdatabasename
+
+# list active connections
+SELECT * FROM table_name;
 ```
 
 [Top](#configuration)

@@ -16,8 +16,8 @@ services:
 
 networks:
   metrics:
-    external:
-      name: metrics
+    name: metrics
+    external: true
 
 volumes:
   prometheus_data: {}

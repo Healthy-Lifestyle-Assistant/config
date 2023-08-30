@@ -19,8 +19,8 @@ services:
 
 networks:
   postgres:
-    external:
-      name: common
+    name: common
+    external: true
   metrics:
-    external:
-      name: metrics
+    name: metrics
+    external: true
