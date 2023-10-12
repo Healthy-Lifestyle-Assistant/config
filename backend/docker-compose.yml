@@ -1,8 +1,8 @@
 version: "3"
 services:
-  assistant:
-    container_name: app
-    image: healthylifestyle/assistant:0.0.1
+  backend:
+    container_name: backend
+    image: healthylifestyle/backend:0.0.3
     networks:
       - postgres
       - metrics
