@@ -19,23 +19,8 @@ echo "Copied frontend files to /var/www/html/frontend successfully"
 
 sudo docker stop backend
 sudo docker rm backend
-sudo docker image rm healthylifestyle/backend:latest
+sudo docker image rm healthylifestyle/backend:0.0.9
 echo "Stopped and removed backend Docker container and related images successfully"
-
-sudo docker stop postgres
-sudo docker rm postgres
-sudo docker volume rm postgres_postgres-data
-echo "Stopped and removed postgres Docker container and related volumes successfully"
-
-cd ~/config/postgres || { echo "Failed to change directory to ~/config/postgres"; exit 1; }
-echo "Changed directory to ~/config/postgres successfully"
-
-sudo docker compose up --force-recreate -d
-if [ $? -ne 0 ]; then
-    echo "Failed to start postgres container using docker-compose"
-    exit 1
-fi
-echo "Started postgres container using docker-compose successfully"
 
 cd ~/config/backend || { echo "Failed to change directory to ~/config/backend"; exit 1; }
 echo "Changed directory to ~/config/backend successfully"

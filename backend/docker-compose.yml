@@ -2,7 +2,7 @@ version: "3"
 services:
   backend:
     container_name: backend
-    image: healthylifestyle/backend:0.0.9
+    image: healthylifestyle/backend:latest
     networks:
       - postgres
       - metrics
