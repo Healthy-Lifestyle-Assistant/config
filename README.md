@@ -14,6 +14,7 @@
 cd ~
 git clone https://github.com/Healthy-Lifestyle-App/config.git
 sudo cp ~/config/nginx/nginx.config /etc/nginx/sites-available/
+
 sed -i 's/domain_or_IP/<you_domain_or_IP>' /etc/nginx/sites-available/nginx.config
 sudo ln -s /etc/nginx/sites-available/nginx.config /etc/nginx/sites-enabled/
 ```
@@ -22,10 +23,10 @@ sudo ln -s /etc/nginx/sites-available/nginx.config /etc/nginx/sites-enabled/
 
 ```sh
 cd ~
-git clone https://github.com/Healthy-Lifestyle-Assistant/client.git
-sudo cp -a ~/client/dist /var/www/html
+git clone https://github.com/Healthy-Lifestyle-Assistant/frontend.git
+sudo cp -a ~/frontend/dist /var/www/html/frontend
 # alternative
-# sudo cp -a ~/client/dist /usr/share/nginx/html
+# sudo cp -a ~/frontend/dist /usr/share/nginx/html
 ```
 
 ### Restart
