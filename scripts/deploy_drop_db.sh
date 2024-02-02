@@ -30,7 +30,7 @@ echo "Stopped and removed postgres Docker container and related volumes successf
 cd ~/config/postgres || { echo "Failed to change directory to ~/config/postgres"; exit 1; }
 echo "Changed directory to ~/config/postgres successfully"
 
-sudo docker-compose up --force-recreate -d
+sudo docker compose up --force-recreate -d
 if [ $? -ne 0 ]; then
     echo "Failed to start postgres container using docker-compose"
     exit 1
@@ -40,7 +40,7 @@ echo "Started postgres container using docker-compose successfully"
 cd ~/config/backend || { echo "Failed to change directory to ~/config/backend"; exit 1; }
 echo "Changed directory to ~/config/backend successfully"
 
-sudo docker-compose up --force-recreate -d
+sudo docker compose up --force-recreate -d
 if [ $? -ne 0 ]; then
     echo "Failed to start backend container using docker-compose"
     exit 1
