@@ -19,7 +19,7 @@ echo "Copied frontend files to /var/www/html/frontend successfully"
 
 sudo docker stop backend
 sudo docker rm backend
-sudo docker image rm healthylifestyle/backend:0.0.9
+sudo docker image rm healthylifestyle/backend:latest
 echo "Stopped and removed backend Docker container and related images successfully"
 
 cd ~/config/backend || { echo "Failed to change directory to ~/config/backend"; exit 1; }
