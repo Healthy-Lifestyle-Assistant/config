@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Update frontend build
 cd ~/frontend || { echo "Failed to change directory to ~/frontend"; exit 1; }
 echo "Changed directory to ~/frontend successfully"
 
@@ -17,11 +18,13 @@ if [ $? -ne 0 ]; then
 fi
 echo "Copied frontend files to /var/www/html/frontend successfully"
 
+# Remove backend containter and image
 sudo docker stop backend
 sudo docker rm backend
 sudo docker image rm healthylifestyle/backend:latest
 echo "Stopped and removed backend Docker container and related images successfully"
 
+# Create backend container
 cd ~/config/backend || { echo "Failed to change directory to ~/config/backend"; exit 1; }
 echo "Changed directory to ~/config/backend successfully"
 
@@ -32,6 +35,7 @@ if [ $? -ne 0 ]; then
 fi
 echo "Started backend container using docker-compose successfully"
 
+# Restart nginx
 sudo nginx -t
 if [ $? -ne 0 ]; then
     echo "Nginx configuration test failed"

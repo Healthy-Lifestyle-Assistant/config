@@ -1,0 +1,29 @@
+version: "3"
+services:
+  backend:
+    container_name: backend
+    image: healthylifestyle/backend:latest-test
+    networks:
+      - postgres
+      - metrics
+      - kafka-net
+    environment:
+      - PROFILE=${PROFILE}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+    expose:
+      - 8085
+    ports:
+      - 8085:8085
+    restart: unless-stopped
+
+networks:
+  postgres:
+    name: common
+    external: true
+  metrics:
+    name: metrics
+    external: true
+  kafka-net:
+    external: true
