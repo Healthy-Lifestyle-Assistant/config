@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Update frontend build
 cd ~/frontend || { echo "Failed to change directory to ~/frontend"; exit 1; }
 echo "Changed directory to ~/frontend successfully"
 
@@ -17,16 +18,19 @@ if [ $? -ne 0 ]; then
 fi
 echo "Copied frontend files to /var/www/html/frontend successfully"
 
+# Remove backend containter and image
 sudo docker stop backend
 sudo docker rm backend
 sudo docker image rm healthylifestyle/backend:latest
 echo "Stopped and removed backend Docker container and related images successfully"
 
+# Remove postgres containter and image
 sudo docker stop postgres
 sudo docker rm postgres
 sudo docker volume rm postgres_postgres-data
 echo "Stopped and removed postgres Docker container and related volumes successfully"
 
+# Create postgres container
 cd ~/config/postgres || { echo "Failed to change directory to ~/config/postgres"; exit 1; }
 echo "Changed directory to ~/config/postgres successfully"
 
@@ -37,6 +41,18 @@ if [ $? -ne 0 ]; then
 fi
 echo "Started postgres container using docker-compose successfully"
 
+# Create kafka container
+cd ~/config/kafka/prod || { echo "Failed to change directory to ~/config/kafka/prod"; exit 1; }
+echo "Changed directory to ~/config/postgres successfully"
+
+sudo docker compose up --force-recreate -d
+if [ $? -ne 0 ]; then
+    echo "Failed to start kafka container using docker-compose"
+    exit 1
+fi
+echo "Started kafka container using docker-compose successfully"
+
+# Create backend container
 cd ~/config/backend || { echo "Failed to change directory to ~/config/backend"; exit 1; }
 echo "Changed directory to ~/config/backend successfully"
 
@@ -47,6 +63,7 @@ if [ $? -ne 0 ]; then
 fi
 echo "Started backend container using docker-compose successfully"
 
+# Restart nginx
 sudo nginx -t
 if [ $? -ne 0 ]; then
     echo "Nginx configuration test failed"

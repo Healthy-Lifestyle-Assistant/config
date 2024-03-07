@@ -6,6 +6,7 @@ services:
     networks:
       - postgres
       - metrics
+      - kafka-net
     environment:
       - PROFILE=${PROFILE}
       - DB_USERNAME=${DB_USERNAME}
@@ -23,4 +24,6 @@ networks:
     external: true
   metrics:
     name: metrics
+    external: true
+  kafka-net:
     external: true
