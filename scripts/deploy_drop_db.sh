@@ -41,17 +41,6 @@ if [ $? -ne 0 ]; then
 fi
 echo "Started postgres container using docker-compose successfully"
 
-# Create kafka container
-cd ~/config/kafka/prod || { echo "Failed to change directory to ~/config/kafka/prod"; exit 1; }
-echo "Changed directory to ~/config/postgres successfully"
-
-sudo docker compose up --force-recreate -d
-if [ $? -ne 0 ]; then
-    echo "Failed to start kafka container using docker-compose"
-    exit 1
-fi
-echo "Started kafka container using docker-compose successfully"
-
 # Create backend container
 cd ~/config/backend || { echo "Failed to change directory to ~/config/backend"; exit 1; }
 echo "Changed directory to ~/config/backend successfully"
