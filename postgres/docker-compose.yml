@@ -19,7 +19,7 @@ services:
     restart: unless-stopped
 
 volumes:
-  postgres-data:
+  postgres_data:
 
 networks:
   default:
