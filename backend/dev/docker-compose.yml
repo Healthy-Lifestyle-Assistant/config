@@ -4,9 +4,9 @@ services:
     container_name: backend
     image: healthylifestyle/backend:latest-test
     volumes:
-      - backend_data:/
-      - ./firebase-service-account.json:/firebase-service-account.json
-    command: sh -c 'cp /firebase-service-account.json /'
+      # - firebase_credentials:/temp
+      - ./firebase-service-account.json:/temp/firebase-service-account.json
+    # command: sh -c 'cp /firebase-service-account.json /temp'
     networks:
       - postgres
       - metrics
@@ -21,8 +21,8 @@ services:
       - 8085:8085
     restart: unless-stopped
 
-volumes:
-  backend_data:
+# volumes:
+#   firebase_credentials:
 
 networks:
   postgres:
